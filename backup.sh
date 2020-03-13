@@ -5,6 +5,7 @@ BACKUP_DIR="db_backups/$TIMESTAMP"
 
 echo "** STARTING BACKUP PROCESS **\n"
 
+cd "$(dirname "$0")"
 export $(cat .env | xargs)
 
 # Create backup directory in case it doesn't exist

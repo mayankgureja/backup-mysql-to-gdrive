@@ -52,3 +52,8 @@ Add the following line to your Cron file (change the path to `backup.sh` as need
 ```
 @weekly sh /home/user/backup-mysql-to-gdrive/backup.sh >> /var/log/cron/mysqlbackup.log 2>&1
 ```
+
+## Useful Links
+https://taranjeet.cc/auto-backup-mysql-database-to-google-drive
+
+https://gist.github.com/sutlxwhx/7355dd1a65ea2a0889fb8dee6059283e
