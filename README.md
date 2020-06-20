@@ -35,7 +35,7 @@ curl https://rclone.org/install.sh | sudo bash
 rclone config
 ```
 
-**Tip:** Set up a common *remote* for all servers where this task will run, so you can reuse for multiple servers' database backups. You can differentiate between the backups for each server using the `SERVER_ALIAS` environment variable which you will define below.
+**Tip:** Set up a common *remote* for all servers where this task will run, so you can reuse for multiple servers' database backups. This will allow you to run `rclone config` only once and then copy the `rclone.conf` file to each server without needing to go through configuration again. You can differentiate between the backups for each server using the `SERVER_ALIAS` environment variable outlined below.
 
 ### 3. Setup Environment Variables
 
