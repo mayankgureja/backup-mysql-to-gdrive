@@ -65,7 +65,7 @@ crontab -e
 
 Add the following line to your Cron file (change the path to `backup.sh` as needed):
 ```shell
-@weekly sh /home/user/backup-mysql-to-gdrive/backup.sh >> /var/log/cron/mysqlbackup.log 2>&1
+@weekly sh /home/user/backup-mysql-to-gdrive/backup.sh >> /home/user/backup-mysql-to-gdrive/logs/cron.log 2>&1
 ```
 
 ## Useful Links
