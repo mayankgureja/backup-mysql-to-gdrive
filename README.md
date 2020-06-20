@@ -2,19 +2,19 @@
 
 Bash scripts for backing up MySQL DBs to GDrive
 
-## Pre-requisites
+## Prerequisites
 
-We assume mysql is already installed, configured and running on your server.
+We assume `mysql` is already installed, configured and running on your server.
 
-### 1. Create MySQL user for extracting databases
+### 1. Create MySQL User For Exporting Databases
 
 Launch mysql:
-```
+```shell
 sudo mysql -uroot -p
 ```
 and run the following commands after replacing `'password_goes_here'` with a newly generated one for your server:
 
-```
+```sql
 CREATE USER 'lazydev'@'localhost' IDENTIFIED BY 'password_goes_here';
 
 GRANT ALL PRIVILEGES ON *.* TO 'lazydev'@'localhost' WITH GRANT OPTION;
@@ -22,38 +22,54 @@ GRANT ALL PRIVILEGES ON *.* TO 'lazydev'@'localhost' WITH GRANT OPTION;
 FLUSH PRIVILEGES;
 ```
 
-### 2. Install and configure rclone
+### 2. Install and configure `rclone`
 
 See `rclone` documentation for installation here: https://rclone.org/install
 
 See `rclone` documentation for setting up Drive here: https://rclone.org/drive
 
 For Linux, run:
-```
+```shell
 curl https://rclone.org/install.sh | sudo bash
 
 rclone config
 ```
 
-## How to run
+**Tip:** Set up a common *remote* for all servers where this task will run, so you can reuse for multiple servers' database backups. You can differentiate between the backups for each server using the `SERVER_ALIAS` environment variable which you will define below.
 
+### 3. Setup Environment Variables
+
+Make a copy of `.env.example` in the root of this application and name it `.env`. Change the variables as needed.
+
+**NOTE: These should be kept secret and not checked-in to any source control.**
+
+```shell
+DB_USERNAME=As set up in Step 1 above
+DB_PASSWORD=As set up in Step 1 above
+RCLONE_REMOTE=The name of the remote you set up in Step 2
+SERVER_ALIAS=The name of the folder into which the server's backup is stored within the remote. Name as appropriate to help differentiate between servers
 ```
+
+## How To Run
+
+```shell
 sh backup.sh
 ```
 
-## Set up Cron job to run weekly backups
+## Run Weekly Backups Using Cron
 
 Open Cron (use Nano if asked):
-```
+```shell
 crontab -e
 ```
 
 Add the following line to your Cron file (change the path to `backup.sh` as needed):
-```
+```shell
 @weekly sh /home/user/backup-mysql-to-gdrive/backup.sh >> /var/log/cron/mysqlbackup.log 2>&1
 ```
 
 ## Useful Links
+
 https://taranjeet.cc/auto-backup-mysql-database-to-google-drive
 
 https://gist.github.com/sutlxwhx/7355dd1a65ea2a0889fb8dee6059283e

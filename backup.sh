@@ -1,12 +1,13 @@
 #!/bin/sh
 
-TIMESTAMP=$(date +"%Y-%m-%d")
-BACKUP_DIR="db_backups/$TIMESTAMP"
-
 echo "** STARTING BACKUP PROCESS **\n"
 
 cd "$(dirname "$0")"
 export $(cat .env | xargs)
+
+# Backup folder name
+TIMESTAMP=$(date +"%Y-%m-%d")
+BACKUP_DIR="$SERVER_ALIAS/$TIMESTAMP"
 
 # Create backup directory in case it doesn't exist
 mkdir -p "$BACKUP_DIR"
