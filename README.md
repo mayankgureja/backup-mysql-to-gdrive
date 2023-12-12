@@ -44,6 +44,8 @@ Make a copy of `.env.example` in the root of this application and name it `.env`
 **NOTE: These should be kept secret and not checked-in to any source control.**
 
 ```shell
+DB_HOSTNAME=Hostname of database server
+DB_PORT=Port on the database server
 DB_USERNAME=As set up in Step 1 above
 DB_PASSWORD=As set up in Step 1 above
 RCLONE_REMOTE=The name of the remote you set up in Step 2
